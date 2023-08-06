@@ -1,3 +1,3 @@
 # Password Generator
 
-[!Password Generator Preview](./PasswordGeneratorPreview.png)
+![Password Generator Preview](./PasswordGeneratorPreview.png)

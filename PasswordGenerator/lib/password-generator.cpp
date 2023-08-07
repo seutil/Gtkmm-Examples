@@ -17,7 +17,7 @@ PasswordGenerator::generate(int length) const
 
     std::string out;
     out.reserve(length);
-    while (length-- > 0)
+    while (length--)
         out.push_back(m_alphabet[rand() % m_alphabet.size()]);
 
     return out;

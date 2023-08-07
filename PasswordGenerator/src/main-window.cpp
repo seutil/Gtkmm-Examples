@@ -13,14 +13,17 @@ MainWindow::MainWindow(BaseObjectType* c_object,
     m_builder->get_widget<Gtk::Label>("lbl_password", m_lbl_password);
     m_builder->get_widget<Gtk::CheckButton>("chk_use_digits", m_chk_use_digits);
     m_builder->get_widget<Gtk::CheckButton>("chk_use_whitespace", m_chk_use_whitespace);
-    m_builder->get_widget<Gtk::CheckButton>("chk_use_special_characters", m_chk_use_special_charactes);
+    m_builder->get_widget<Gtk::CheckButton>("chk_use_special_characters", m_chk_use_special_characters);
     m_builder->get_widget<Gtk::Scale>("scale_password_length", m_scale_password_length);
+    m_builder->get_widget<Gtk::CheckButton>("chk_use_additional_characters", m_chk_use_additional_characters);
     m_builder->get_widget<Gtk::Entry>("entry_additional_characters", m_entry_additional_characters);
     m_builder->get_widget<Gtk::Button>("btn_generate_password", m_btn_generate_password);
 
     m_chk_use_digits->signal_toggled().connect(sigc::mem_fun(*this, &MainWindow::on_chk_use_digits_toggled));
     m_chk_use_whitespace->signal_toggled().connect(sigc::mem_fun(*this, &MainWindow::on_chk_use_whitespace_toggled));
-    m_chk_use_special_charactes->signal_toggled().connect(sigc::mem_fun(*this, &MainWindow::on_chk_use_special_characters_toggled));
+    m_chk_use_special_characters->signal_toggled().connect(sigc::mem_fun(*this, &MainWindow::on_chk_use_special_characters_toggled));
+    m_chk_use_additional_characters->signal_toggled().connect(sigc::mem_fun(*this, &MainWindow::on_chk_use_additional_characters_toggled));
+    m_entry_additional_characters->signal_changed().connect(sigc::mem_fun(*this, &MainWindow::on_entry_additional_characters_changed));
     m_btn_generate_password->signal_clicked().connect(sigc::mem_fun(*this, &MainWindow::on_btn_generate_password_clicked));
 }
 
@@ -45,10 +48,30 @@ MainWindow::on_chk_use_whitespace_toggled()
 void
 MainWindow::on_chk_use_special_characters_toggled()
 {
-    if (m_chk_use_special_charactes->get_active())
+    if (m_chk_use_special_characters->get_active())
         m_generator.add(SPECIAL_CHARACTERS);
     else
         m_generator.remove(SPECIAL_CHARACTERS);
+}
+
+void
+MainWindow::on_chk_use_additional_characters_toggled()
+{
+    m_prev_entry_text = "";
+    m_entry_additional_characters->set_sensitive(m_chk_use_additional_characters->get_active());
+    if (!m_chk_use_additional_characters->get_active())
+    {
+        m_generator.remove(m_entry_additional_characters->get_text());
+        m_entry_additional_characters->set_text("");
+    }
+}
+
+void
+MainWindow::on_entry_additional_characters_changed()
+{
+    m_generator.remove(m_prev_entry_text);
+    m_prev_entry_text = m_entry_additional_characters->get_text();
+    m_generator.add(m_prev_entry_text);
 }
 
 void

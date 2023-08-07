@@ -28,39 +28,27 @@ void
 MainWindow::on_chk_use_digits_toggled()
 {
     if (m_chk_use_digits->get_active())
-    {
         m_generator.add(DIGITS);
-    }
     else
-    {
         m_generator.remove(DIGITS);
-    }
 }
 
 void
 MainWindow::on_chk_use_whitespace_toggled()
 {
     if (m_chk_use_whitespace->get_active())
-    {
         m_generator.add(WHITESPACE);
-    }
     else
-    {
         m_generator.remove(WHITESPACE);
-    }
 }
 
 void
 MainWindow::on_chk_use_special_characters_toggled()
 {
     if (m_chk_use_special_charactes->get_active())
-    {
         m_generator.add(SPECIAL_CHARACTERS);
-    }
     else
-    {
         m_generator.remove(SPECIAL_CHARACTERS);
-    }
 }
 
 void

@@ -12,7 +12,9 @@ PasswordGenerator::PasswordGenerator()
 std::string
 PasswordGenerator::generate(int length) const
 {
-    if (length <= 0) { return ""; }
+    if (length <= 0)
+        return "";
+
     std::string out;
     out.reserve(length);
     while (length-- > 0)
@@ -46,7 +48,5 @@ PasswordGenerator::remove(const std::string& chars)
         m_alphabet.end()
     );
     for (char c : chars)
-    {
         m_alphabet_chars.erase(c);
-    }
 }

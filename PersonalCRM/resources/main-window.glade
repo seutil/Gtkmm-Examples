@@ -27,16 +27,80 @@
     <property name="step-increment">1</property>
     <property name="page-increment">1</property>
   </object>
+  <object class="GtkListStore" id="liststore_cities">
+    <columns>
+      <!-- column-name name -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkListStore" id="liststore_countries">
+    <columns>
+      <!-- column-name name -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkListStore" id="liststore_departments">
+    <columns>
+      <!-- column-name name -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Unknown</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Administration</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Research</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Development</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Finance</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="liststore_positions">
+    <columns>
+      <!-- column-name name -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Unknown</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Administrator</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Researcher</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Developer</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Finance Controller</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="liststore_regions">
+    <columns>
+      <!-- column-name name -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
   <object class="GtkTextBuffer" id="tview_notes_buf"/>
   <object class="GtkApplicationWindow" id="win_main">
     <property name="width-request">750</property>
-    <property name="height-request">400</property>
+    <property name="height-request">450</property>
     <property name="can-focus">False</property>
     <property name="title" translatable="yes">PersonalCRM</property>
     <property name="resizable">False</property>
     <property name="window-position">center</property>
     <property name="default-width">750</property>
-    <property name="default-height">400</property>
+    <property name="default-height">450</property>
     <child>
       <object class="GtkBox" id="box_main">
         <property name="visible">True</property>
@@ -78,6 +142,7 @@
                       <object class="GtkExpander" id="exp_personal_information">
                         <property name="visible">True</property>
                         <property name="can-focus">True</property>
+                        <property name="expanded">True</property>
                         <child>
                           <!-- n-columns=6 n-rows=4 -->
                           <object class="GtkGrid" id="grid_personal_information">
@@ -89,73 +154,6 @@
                             <property name="margin-bottom">5</property>
                             <property name="row-spacing">9</property>
                             <property name="column-spacing">7</property>
-                            <child>
-                              <object class="GtkLabel" id="lbl_country">
-                                <property name="visible">True</property>
-                                <property name="can-focus">False</property>
-                                <property name="label" translatable="yes">&lt;b&gt;Contry&lt;/b&gt;</property>
-                                <property name="use-markup">True</property>
-                              </object>
-                              <packing>
-                                <property name="left-attach">0</property>
-                                <property name="top-attach">3</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkComboBox" id="cmb_county">
-                                <property name="visible">True</property>
-                                <property name="can-focus">False</property>
-                              </object>
-                              <packing>
-                                <property name="left-attach">1</property>
-                                <property name="top-attach">3</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkLabel" id="lbl_region">
-                                <property name="visible">True</property>
-                                <property name="can-focus">False</property>
-                                <property name="label" translatable="yes">&lt;b&gt;Region&lt;/b&gt;</property>
-                                <property name="use-markup">True</property>
-                              </object>
-                              <packing>
-                                <property name="left-attach">2</property>
-                                <property name="top-attach">3</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkComboBox" id="cmb_region">
-                                <property name="visible">True</property>
-                                <property name="can-focus">False</property>
-                              </object>
-                              <packing>
-                                <property name="left-attach">3</property>
-                                <property name="top-attach">3</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkLabel" id="lbl_city">
-                                <property name="visible">True</property>
-                                <property name="can-focus">False</property>
-                                <property name="halign">end</property>
-                                <property name="label" translatable="yes">&lt;b&gt;City&lt;/b&gt;</property>
-                                <property name="use-markup">True</property>
-                              </object>
-                              <packing>
-                                <property name="left-attach">4</property>
-                                <property name="top-attach">3</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkComboBox" id="cmb_city">
-                                <property name="visible">True</property>
-                                <property name="can-focus">False</property>
-                              </object>
-                              <packing>
-                                <property name="left-attach">5</property>
-                                <property name="top-attach">3</property>
-                              </packing>
-                            </child>
                             <child>
                               <object class="GtkLabel" id="lbl_email">
                                 <property name="visible">True</property>
@@ -205,7 +203,7 @@
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="halign">end</property>
-                                <property name="label" translatable="yes">&lt;b&gt;Name&lt;/b&gt;</property>
+                                <property name="label" translatable="yes">&lt;b&gt;Name&lt;/b&gt; *</property>
                                 <property name="use-markup">True</property>
                               </object>
                               <packing>
@@ -227,7 +225,7 @@
                               <object class="GtkLabel" id="lbl_surname">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
-                                <property name="label" translatable="yes">&lt;b&gt;Surname&lt;/b&gt;</property>
+                                <property name="label" translatable="yes">&lt;b&gt;Surname&lt;/b&gt; *</property>
                                 <property name="use-markup">True</property>
                               </object>
                               <packing>
@@ -249,7 +247,7 @@
                               <object class="GtkLabel" id="lbl_patronomic">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
-                                <property name="label" translatable="yes">&lt;b&gt;Patronomic&lt;/b&gt;</property>
+                                <property name="label" translatable="yes">&lt;b&gt;Patronomic&lt;/b&gt; *</property>
                                 <property name="use-markup">True</property>
                               </object>
                               <packing>
@@ -322,6 +320,100 @@
                               </packing>
                             </child>
                             <child>
+                              <object class="GtkComboBox" id="cmb_city">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="model">liststore_cities</property>
+                                <signal name="changed" handler="on_cmb_city_changed" swapped="no"/>
+                                <child>
+                                  <object class="GtkCellRendererText"/>
+                                  <attributes>
+                                    <attribute name="text">0</attribute>
+                                  </attributes>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left-attach">5</property>
+                                <property name="top-attach">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="lbl_city">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="halign">end</property>
+                                <property name="label" translatable="yes">&lt;b&gt;City&lt;/b&gt;</property>
+                                <property name="use-markup">True</property>
+                              </object>
+                              <packing>
+                                <property name="left-attach">4</property>
+                                <property name="top-attach">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkComboBox" id="cmb_region">
+                                <property name="visible">True</property>
+                                <property name="sensitive">False</property>
+                                <property name="can-focus">False</property>
+                                <property name="model">liststore_regions</property>
+                                <signal name="changed" handler="on_cmb_region_changed" swapped="no"/>
+                                <child>
+                                  <object class="GtkCellRendererText"/>
+                                  <attributes>
+                                    <attribute name="text">0</attribute>
+                                  </attributes>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left-attach">3</property>
+                                <property name="top-attach">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="lbl_region">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="label" translatable="yes">&lt;b&gt;Region&lt;/b&gt;</property>
+                                <property name="use-markup">True</property>
+                              </object>
+                              <packing>
+                                <property name="left-attach">2</property>
+                                <property name="top-attach">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="lbl_country">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="label" translatable="yes">&lt;b&gt;Contry&lt;/b&gt;</property>
+                                <property name="use-markup">True</property>
+                              </object>
+                              <packing>
+                                <property name="left-attach">0</property>
+                                <property name="top-attach">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkComboBox" id="cmb_county">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="model">liststore_countries</property>
+                                <property name="active">0</property>
+                                <property name="active-id">name</property>
+                                <signal name="changed" handler="on_cmb_county_changed" swapped="no"/>
+                                <child>
+                                  <object class="GtkCellRendererText"/>
+                                  <attributes>
+                                    <attribute name="text">0</attribute>
+                                  </attributes>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left-attach">1</property>
+                                <property name="top-attach">3</property>
+                              </packing>
+                            </child>
+                            <child>
                               <placeholder/>
                             </child>
                             <child>
@@ -380,32 +472,18 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="lbl_position">
-                                <property name="visible">True</property>
-                                <property name="can-focus">False</property>
-                                <property name="label" translatable="yes">&lt;b&gt;Position&lt;/b&gt;</property>
-                                <property name="use-markup">True</property>
-                              </object>
-                              <packing>
-                                <property name="left-attach">0</property>
-                                <property name="top-attach">1</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkComboBox" id="cmb_position">
-                                <property name="visible">True</property>
-                                <property name="can-focus">False</property>
-                              </object>
-                              <packing>
-                                <property name="left-attach">1</property>
-                                <property name="top-attach">1</property>
-                                <property name="width">2</property>
-                              </packing>
-                            </child>
-                            <child>
                               <object class="GtkComboBox" id="cmb_department">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
+                                <property name="model">liststore_departments</property>
+                                <property name="active">0</property>
+                                <property name="active-id">name</property>
+                                <child>
+                                  <object class="GtkCellRendererText"/>
+                                  <attributes>
+                                    <attribute name="text">0</attribute>
+                                  </attributes>
+                                </child>
                               </object>
                               <packing>
                                 <property name="left-attach">1</property>
@@ -414,37 +492,15 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="lbl_supervisor">
+                              <object class="GtkLabel" id="lbl_salary_currancy">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
-                                <property name="label" translatable="yes">&lt;b&gt;Superviser&lt;/b&gt;</property>
+                                <property name="halign">start</property>
+                                <property name="label" translatable="yes">&lt;b&gt;$&lt;/b&gt;</property>
                                 <property name="use-markup">True</property>
                               </object>
                               <packing>
-                                <property name="left-attach">3</property>
-                                <property name="top-attach">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkEntry" id="entry_supervisor">
-                                <property name="visible">True</property>
-                                <property name="can-focus">True</property>
-                              </object>
-                              <packing>
-                                <property name="left-attach">4</property>
-                                <property name="top-attach">0</property>
-                                <property name="width">2</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkLabel" id="lbl_salary">
-                                <property name="visible">True</property>
-                                <property name="can-focus">False</property>
-                                <property name="label" translatable="yes">&lt;b&gt;Salary&lt;/b&gt;</property>
-                                <property name="use-markup">True</property>
-                              </object>
-                              <packing>
-                                <property name="left-attach">0</property>
+                                <property name="left-attach">2</property>
                                 <property name="top-attach">2</property>
                               </packing>
                             </child>
@@ -461,16 +517,69 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="lbl_salary_currancy">
+                              <object class="GtkLabel" id="lbl_salary">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
-                                <property name="halign">start</property>
-                                <property name="label" translatable="yes">&lt;b&gt;$&lt;/b&gt;</property>
+                                <property name="label" translatable="yes">&lt;b&gt;Salary&lt;/b&gt;</property>
                                 <property name="use-markup">True</property>
                               </object>
                               <packing>
-                                <property name="left-attach">2</property>
+                                <property name="left-attach">0</property>
                                 <property name="top-attach">2</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkComboBox" id="cmb_position">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="model">liststore_positions</property>
+                                <property name="active">0</property>
+                                <child>
+                                  <object class="GtkCellRendererText"/>
+                                  <attributes>
+                                    <attribute name="text">0</attribute>
+                                  </attributes>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left-attach">1</property>
+                                <property name="top-attach">1</property>
+                                <property name="width">2</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="lbl_position">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="label" translatable="yes">&lt;b&gt;Position&lt;/b&gt;</property>
+                                <property name="use-markup">True</property>
+                              </object>
+                              <packing>
+                                <property name="left-attach">0</property>
+                                <property name="top-attach">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkEntry" id="entry_supervisor">
+                                <property name="visible">True</property>
+                                <property name="can-focus">True</property>
+                              </object>
+                              <packing>
+                                <property name="left-attach">4</property>
+                                <property name="top-attach">0</property>
+                                <property name="width">2</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="lbl_superviser">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="label" translatable="yes">&lt;b&gt;Superviser&lt;/b&gt;</property>
+                                <property name="use-markup">True</property>
+                              </object>
+                              <packing>
+                                <property name="left-attach">3</property>
+                                <property name="top-attach">0</property>
                               </packing>
                             </child>
                             <child>
@@ -497,7 +606,7 @@
                           <object class="GtkLabel">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
-                            <property name="label" translatable="yes">Employee Infromation</property>
+                            <property name="label" translatable="yes">Employee Information</property>
                           </object>
                         </child>
                       </object>
@@ -516,6 +625,7 @@
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="margin-start">5</property>
+                            <property name="margin-end">5</property>
                             <property name="margin-top">5</property>
                             <property name="margin-bottom">5</property>
                             <property name="orientation">vertical</property>

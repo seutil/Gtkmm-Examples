@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+    <gresource prefix="/org/seutil/personalcrm">
+        <file alias="main-window" preprocess="xml-stripblanks">main-window.glade</file>
+    </gresource>
+</gresources>

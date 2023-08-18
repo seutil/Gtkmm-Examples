@@ -12,7 +12,10 @@ XmlReader::read(std::vector<Employee>& employees)
     using namespace tinyxml2;
     employees.clear();
     XMLDocument xml_doc;
-    xml_doc.LoadFile(m_file_location.c_str());
+    XMLError error = xml_doc.LoadFile(m_file_location.c_str());
+    if (error != XML_SUCCESS)
+        return;
+
     XMLElement* root = xml_doc.FirstChildElement("employees");
     for (XMLElement* employee_tag = root->FirstChildElement("employee"); employee_tag != nullptr; employee_tag = employee_tag->NextSiblingElement())
     {

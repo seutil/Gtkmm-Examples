@@ -1,12 +1,12 @@
+#include <istream>
 #include "personal-crm.hpp"
 using namespace Lib;
 
-PersonalCrm::PersonalCrm(const std::string& location)
-    : m_reader{std::make_unique<XmlReader>(location)},
-      m_writer{std::make_unique<XmlWriter>(location)}
+void
+PersonalCrm::load(const std::string& location)
 {
-    m_reader->read(m_employees);
-    m_current_employee_id = m_employees.empty() ? -1 : 0;
+    m_reader = std::make_unique<XmlReader>(location);
+    m_writer = std::make_unique<XmlWriter>(location);
 }
 
 void

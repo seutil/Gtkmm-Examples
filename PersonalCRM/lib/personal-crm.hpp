@@ -12,7 +12,7 @@ namespace Lib
 class PersonalCrm
 {
 public:
-    PersonalCrm(const std::string& location);
+    void load(const std::string& location);
     void save();
     bool empty();
     Employee& employee();
@@ -21,7 +21,6 @@ public:
     void add_employee();
     void remove_employee();
 protected:
-    std::string m_location;
     std::unique_ptr<IReader> m_reader;
     std::unique_ptr<IWriter> m_writer;
     std::vector<Employee> m_employees;

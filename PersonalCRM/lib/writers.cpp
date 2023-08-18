@@ -73,4 +73,6 @@ XmlWriter::write(const std::vector<Employee>& employees)
 
         employees_tag->InsertEndChild(employee_tag);
     }
+
+    xml_doc.SaveFile(m_file_location.c_str());
 }

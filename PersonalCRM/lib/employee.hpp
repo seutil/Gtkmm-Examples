@@ -20,6 +20,8 @@ struct Employee
                 position;
     uint salary;
     std::string notes;
+
+    bool valid() const;
 };
 
 }

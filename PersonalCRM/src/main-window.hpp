@@ -10,13 +10,16 @@ public:
 private:
     Lib::PersonalCrm m_crm;
     void display_employee();
-    bool valid_employee_data();
 
     // Handlers
     void on_cmbt_country_changed();
     void on_cmbt_region_changed();
     void on_cmbt_city_changed();
+    void on_btn_back_clicked();
+    void on_btn_forward_clicked();
     void on_btn_add_clicked();
+    void on_btn_remove_clicked();
+    void on_btn_save_clicked();
 
     // Widgets
     Gtk::Box* m_box_information;

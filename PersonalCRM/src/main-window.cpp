@@ -63,11 +63,23 @@ MainWindow::MainWindow(BaseObjectType* c_object,
     builder->get_widget<Gtk::Button>("btn_save", m_btn_save);
     builder->get_widget<Gtk::Button>("btn_quit", m_btn_quit);
 
+    m_entry_name->signal_changed().connect([this]{ m_crm.employee().name = m_entry_name->get_text(); });
+    m_entry_surname->signal_changed().connect([this]{ m_crm.employee().surname = m_entry_surname->get_text(); });
+    m_entry_patronomic->signal_changed().connect([this]{ m_crm.employee().patronomic = m_entry_patronomic->get_text(); });
+    m_entry_phone->signal_changed().connect([this]{ m_crm.employee().phone = m_entry_phone->get_text(); });
+    m_entry_email->signal_changed().connect([this]{ m_crm.employee().email = m_entry_email->get_text(); });
+    m_entry_supervisor->signal_changed().connect([this]{ m_crm.employee().supervisor = m_entry_supervisor->get_text(); });
+    m_tview_notes->get_buffer()->signal_changed().connect([this]{ m_crm.employee().notes = m_tview_notes->get_buffer()->get_text(); });
     m_cmbt_country->signal_changed().connect(sigc::mem_fun(*this, &MainWindow::on_cmbt_country_changed));
     m_con_cmbt_region = m_cmbt_region->signal_changed().connect(sigc::mem_fun(*this, &MainWindow::on_cmbt_region_changed));
     m_cmbt_city->signal_changed().connect(sigc::mem_fun(*this, &MainWindow::on_cmbt_city_changed));
-    m_btn_quit->signal_clicked().connect(sigc::mem_fun(*this, &MainWindow::close));
+    m_spin_salary->signal_changed().connect([this]{ m_crm.employee().salary = m_spin_salary->get_value(); });
+    m_btn_back->signal_clicked().connect(sigc::mem_fun(*this, &MainWindow::on_btn_back_clicked));
+    m_btn_forward->signal_clicked().connect(sigc::mem_fun(*this, &MainWindow::on_btn_forward_clicked));
+    m_btn_remove->signal_clicked().connect(sigc::mem_fun(*this, &MainWindow::on_btn_remove_clicked));
     m_btn_add->signal_clicked().connect(sigc::mem_fun(*this, &MainWindow::on_btn_add_clicked));
+    m_btn_save->signal_clicked().connect(sigc::mem_fun(*this, &MainWindow::on_btn_save_clicked));
+    m_btn_quit->signal_clicked().connect(sigc::mem_fun(*this, &MainWindow::close));
 
     m_crm.load("personal.xml");
     display_employee();
@@ -116,18 +128,6 @@ MainWindow::display_employee()
     m_btn_remove->set_sensitive();
     m_btn_forward->set_sensitive(m_crm.have_next());
     m_btn_back->set_sensitive(m_crm.have_previouse());
-}
-
-bool
-MainWindow::valid_employee_data()
-{
-    if (m_crm.employees().empty())
-        return true;
-    
-    Lib::Employee& e = m_crm.employee();
-    return !e.name.empty() &&
-           !e.surname.empty() &&
-           !e.patronomic.empty();
 }
 
 // Handlers
@@ -200,11 +200,47 @@ MainWindow::on_cmbt_city_changed()
 }
 
 void
+MainWindow::on_btn_back_clicked()
+{
+    if (!m_crm.employee().valid())
+        return;
+
+    m_crm.previouse_employee();
+    display_employee();
+}
+
+void
+MainWindow::on_btn_forward_clicked()
+{
+    if (!m_crm.employee().valid())
+        return;
+
+    m_crm.next_employee();
+    display_employee();
+}
+
+void
+MainWindow::on_btn_remove_clicked()
+{
+    m_crm.remove_employee();
+    display_employee();
+}
+
+void
 MainWindow::on_btn_add_clicked()
 {
-    if (!valid_employee_data())
+    if (!m_crm.employees().empty() && !m_crm.employee().valid())
         return;
     
     m_crm.add_employee();
     display_employee();
+}
+
+void
+MainWindow::on_btn_save_clicked()
+{
+    if (!m_crm.employee().valid())
+        return;
+
+    m_crm.save();
 }

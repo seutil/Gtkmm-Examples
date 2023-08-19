@@ -11,8 +11,8 @@ XmlWriter::write(const std::vector<Employee>& employees)
 {
     using namespace tinyxml2;
     XMLDocument xml_doc;
+    xml_doc.InsertFirstChild(xml_doc.NewDeclaration());
     XMLElement* employees_tag = xml_doc.NewElement("employees");
-    xml_doc.InsertFirstChild(employees_tag);
     for (const auto& e : employees)
     {
         XMLElement* employee_tag = xml_doc.NewElement("employee");
@@ -52,15 +52,15 @@ XmlWriter::write(const std::vector<Employee>& employees)
         XMLElement* ei_tag = xml_doc.NewElement("employee_information");
         XMLElement* ei_depratment_tag = xml_doc.NewElement("department");
         XMLElement* ei_position_tag = xml_doc.NewElement("position");
-        XMLElement* ei_superviser_tag = xml_doc.NewElement("superviser");
+        XMLElement* ei_supervisor_tag = xml_doc.NewElement("supervisor");
         XMLElement* ei_salary_tag = xml_doc.NewElement("salary");
         ei_depratment_tag->SetText(e.department.c_str());
         ei_position_tag->SetText(e.position.c_str());
-        ei_superviser_tag->SetText(e.supervisor.c_str());
+        ei_supervisor_tag->SetText(e.supervisor.c_str());
         ei_salary_tag->SetText(e.salary);
         ei_tag->InsertEndChild(ei_depratment_tag);
         ei_tag->InsertEndChild(ei_position_tag);
-        ei_tag->InsertEndChild(ei_superviser_tag);
+        ei_tag->InsertEndChild(ei_supervisor_tag);
         ei_tag->InsertEndChild(ei_salary_tag);
         employee_tag->InsertEndChild(ei_tag);
 
@@ -74,5 +74,6 @@ XmlWriter::write(const std::vector<Employee>& employees)
         employees_tag->InsertEndChild(employee_tag);
     }
 
+    xml_doc.InsertEndChild(employees_tag);
     xml_doc.SaveFile(m_file_location.c_str());
 }

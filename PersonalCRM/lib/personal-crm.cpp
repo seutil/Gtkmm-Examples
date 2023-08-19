@@ -7,6 +7,8 @@ PersonalCrm::load(const std::string& location)
 {
     m_reader = std::make_unique<XmlReader>(location);
     m_writer = std::make_unique<XmlWriter>(location);
+    m_reader->read(m_employees);
+    m_current_employee_id = m_employees.empty() ? -1 : 0;
 }
 
 void
@@ -15,16 +17,16 @@ PersonalCrm::save()
     m_writer->write(m_employees);
 }
 
-bool
-PersonalCrm::empty()
-{
-    return m_employees.empty();
-}
-
 Employee&
 PersonalCrm::employee()
 {
     return m_employees[m_current_employee_id];
+}
+
+std::vector<Employee>&
+PersonalCrm::employees()
+{
+    return m_employees;
 }
 
 void

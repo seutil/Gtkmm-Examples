@@ -14,8 +14,8 @@ class PersonalCrm
 public:
     void load(const std::string& location);
     void save();
-    bool empty();
     Employee& employee();
+    std::vector<Employee>& employees();
     void next_employee();
     void previouse_employee();
     void add_employee();

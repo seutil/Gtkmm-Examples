@@ -1,0 +1,3 @@
+# Hashes of file build rules.
+69901a4498b44f60b33ef4093901ade4 src/CMakeFiles/gresources
+1219dd1918e97495c506d4d2fd1b1d36 src/gresources.c

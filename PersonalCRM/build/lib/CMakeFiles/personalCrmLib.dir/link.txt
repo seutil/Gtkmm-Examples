@@ -1,0 +1,2 @@
+/usr/bin/ar qc libpersonalCrmLib.a CMakeFiles/personalCrmLib.dir/employee.cpp.o
+/usr/bin/ranlib libpersonalCrmLib.a

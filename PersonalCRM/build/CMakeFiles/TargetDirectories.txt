@@ -1,0 +1,9 @@
+/home/vilya/Programming/C++/GtkmmExamples/PersonalCRM/build/CMakeFiles/edit_cache.dir
+/home/vilya/Programming/C++/GtkmmExamples/PersonalCRM/build/CMakeFiles/rebuild_cache.dir
+/home/vilya/Programming/C++/GtkmmExamples/PersonalCRM/build/lib/CMakeFiles/personalCrmLib.dir
+/home/vilya/Programming/C++/GtkmmExamples/PersonalCRM/build/lib/CMakeFiles/edit_cache.dir
+/home/vilya/Programming/C++/GtkmmExamples/PersonalCRM/build/lib/CMakeFiles/rebuild_cache.dir
+/home/vilya/Programming/C++/GtkmmExamples/PersonalCRM/build/src/CMakeFiles/gresources.dir
+/home/vilya/Programming/C++/GtkmmExamples/PersonalCRM/build/src/CMakeFiles/personalCrm.dir
+/home/vilya/Programming/C++/GtkmmExamples/PersonalCRM/build/src/CMakeFiles/edit_cache.dir
+/home/vilya/Programming/C++/GtkmmExamples/PersonalCRM/build/src/CMakeFiles/rebuild_cache.dir

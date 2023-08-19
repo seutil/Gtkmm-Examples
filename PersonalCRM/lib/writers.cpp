@@ -39,6 +39,7 @@ XmlWriter::write(const std::vector<Employee>& employees)
         pi_country_tag->SetText(e.country.c_str());
         pi_region_tag->SetText(e.region.c_str());
         pi_city_tag->SetText(e.city.c_str());
+        pi_tag->InsertEndChild(pi_avatar_location_tag);
         pi_tag->InsertEndChild(pi_gender_tag);
         pi_tag->InsertEndChild(pi_name_tag);
         pi_tag->InsertEndChild(pi_surname_tag);

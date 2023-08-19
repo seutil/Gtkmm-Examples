@@ -119,8 +119,16 @@ MainWindow::display_employee()
     else
         m_cmbt_city->set_active_text(e.city);
 
-    m_cmbt_department->set_active_text(e.department);
-    m_cmbt_position->set_active_text(e.position);
+    if (e.department.empty())
+        m_cmbt_department->set_active_id("-1");
+    else
+        m_cmbt_department->set_active_text(e.department);
+
+    if (e.position.empty())
+        m_cmbt_position->set_active_id("-1");
+    else
+        m_cmbt_position->set_active_text(e.position);
+
     m_spin_salary->set_value(e.salary);
     m_tview_notes->get_buffer()->set_text(e.notes);
 

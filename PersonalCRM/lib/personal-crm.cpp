@@ -29,6 +29,18 @@ PersonalCrm::employees()
     return m_employees;
 }
 
+bool
+PersonalCrm::have_next() const
+{
+    return m_current_employee_id < m_employees.size();
+}
+
+bool
+PersonalCrm::have_previouse() const
+{
+    return m_current_employee_id > 0;
+}
+
 void
 PersonalCrm::next_employee()
 {

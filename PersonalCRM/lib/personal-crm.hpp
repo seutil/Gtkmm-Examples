@@ -16,6 +16,8 @@ public:
     void save();
     Employee& employee();
     std::vector<Employee>& employees();
+    bool have_next() const;
+    bool have_previouse() const;
     void next_employee();
     void previouse_employee();
     void add_employee();

@@ -32,7 +32,7 @@ PersonalCrm::employees()
 bool
 PersonalCrm::have_next() const
 {
-    return m_current_employee_id < m_employees.size();
+    return m_current_employee_id < m_employees.size() - 1;
 }
 
 bool

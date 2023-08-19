@@ -1,4 +1,3 @@
-#include <iostream>
 #include <tinyxml2.h>
 #include "readers.hpp"
 using namespace Lib;

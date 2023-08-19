@@ -2,94 +2,12 @@
 <!-- Generated with glade 3.38.2 -->
 <interface>
   <requires lib="gtk+" version="3.24"/>
-  <object class="GtkAdjustment" id="adjustment_communication">
-    <property name="upper">10</property>
-    <property name="value">5</property>
-    <property name="step-increment">1</property>
-    <property name="page-increment">1</property>
-  </object>
-  <object class="GtkAdjustment" id="adjustment_problem_solving">
-    <property name="upper">10</property>
-    <property name="value">5</property>
-    <property name="step-increment">1</property>
-    <property name="page-increment">10</property>
-  </object>
   <object class="GtkAdjustment" id="adjustment_salary">
     <property name="lower">1000</property>
     <property name="upper">100000</property>
     <property name="value">1000</property>
     <property name="step-increment">100</property>
     <property name="page-increment">10</property>
-  </object>
-  <object class="GtkAdjustment" id="adjustment_time_managment">
-    <property name="upper">10</property>
-    <property name="value">5</property>
-    <property name="step-increment">1</property>
-    <property name="page-increment">1</property>
-  </object>
-  <object class="GtkListStore" id="liststore_cities">
-    <columns>
-      <!-- column-name name -->
-      <column type="gchararray"/>
-    </columns>
-  </object>
-  <object class="GtkListStore" id="liststore_countries">
-    <columns>
-      <!-- column-name name -->
-      <column type="gchararray"/>
-    </columns>
-  </object>
-  <object class="GtkListStore" id="liststore_departments">
-    <columns>
-      <!-- column-name name -->
-      <column type="gchararray"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes">Unknown</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Administration</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Research</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Development</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Finance</col>
-      </row>
-    </data>
-  </object>
-  <object class="GtkListStore" id="liststore_positions">
-    <columns>
-      <!-- column-name name -->
-      <column type="gchararray"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes">Unknown</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Administrator</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Researcher</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Developer</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Finance Controller</col>
-      </row>
-    </data>
-  </object>
-  <object class="GtkListStore" id="liststore_regions">
-    <columns>
-      <!-- column-name name -->
-      <column type="gchararray"/>
-    </columns>
   </object>
   <object class="GtkTextBuffer" id="tview_notes_buf"/>
   <object class="GtkApplicationWindow" id="main_window">
@@ -101,6 +19,7 @@
     <property name="window-position">center</property>
     <property name="default-width">750</property>
     <property name="default-height">450</property>
+    <property name="icon-name">address-book-new</property>
     <child>
       <object class="GtkBox" id="box_main">
         <property name="visible">True</property>
@@ -320,24 +239,6 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkComboBox" id="cmb_city">
-                                <property name="visible">True</property>
-                                <property name="can-focus">False</property>
-                                <property name="model">liststore_cities</property>
-                                <signal name="changed" handler="on_cmb_city_changed" swapped="no"/>
-                                <child>
-                                  <object class="GtkCellRendererText"/>
-                                  <attributes>
-                                    <attribute name="text">0</attribute>
-                                  </attributes>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="left-attach">5</property>
-                                <property name="top-attach">3</property>
-                              </packing>
-                            </child>
-                            <child>
                               <object class="GtkLabel" id="lbl_city">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
@@ -347,25 +248,6 @@
                               </object>
                               <packing>
                                 <property name="left-attach">4</property>
-                                <property name="top-attach">3</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkComboBox" id="cmb_region">
-                                <property name="visible">True</property>
-                                <property name="sensitive">False</property>
-                                <property name="can-focus">False</property>
-                                <property name="model">liststore_regions</property>
-                                <signal name="changed" handler="on_cmb_region_changed" swapped="no"/>
-                                <child>
-                                  <object class="GtkCellRendererText"/>
-                                  <attributes>
-                                    <attribute name="text">0</attribute>
-                                  </attributes>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="left-attach">3</property>
                                 <property name="top-attach">3</property>
                               </packing>
                             </child>
@@ -394,22 +276,32 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkComboBox" id="cmb_country">
+                              <object class="GtkComboBoxText" id="cmbt_country">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
-                                <property name="model">liststore_countries</property>
-                                <property name="active">0</property>
-                                <property name="active-id">name</property>
-                                <signal name="changed" handler="on_cmb_county_changed" swapped="no"/>
-                                <child>
-                                  <object class="GtkCellRendererText"/>
-                                  <attributes>
-                                    <attribute name="text">0</attribute>
-                                  </attributes>
-                                </child>
                               </object>
                               <packing>
                                 <property name="left-attach">1</property>
+                                <property name="top-attach">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkComboBoxText" id="cmbt_region">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                              </object>
+                              <packing>
+                                <property name="left-attach">3</property>
+                                <property name="top-attach">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkComboBoxText" id="cmbt_city">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                              </object>
+                              <packing>
+                                <property name="left-attach">5</property>
                                 <property name="top-attach">3</property>
                               </packing>
                             </child>
@@ -472,26 +364,6 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkComboBox" id="cmb_department">
-                                <property name="visible">True</property>
-                                <property name="can-focus">False</property>
-                                <property name="model">liststore_departments</property>
-                                <property name="active">0</property>
-                                <property name="active-id">name</property>
-                                <child>
-                                  <object class="GtkCellRendererText"/>
-                                  <attributes>
-                                    <attribute name="text">0</attribute>
-                                  </attributes>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="left-attach">1</property>
-                                <property name="top-attach">0</property>
-                                <property name="width">2</property>
-                              </packing>
-                            </child>
-                            <child>
                               <object class="GtkLabel" id="lbl_salary_currancy">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
@@ -529,25 +401,6 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkComboBox" id="cmb_position">
-                                <property name="visible">True</property>
-                                <property name="can-focus">False</property>
-                                <property name="model">liststore_positions</property>
-                                <property name="active">0</property>
-                                <child>
-                                  <object class="GtkCellRendererText"/>
-                                  <attributes>
-                                    <attribute name="text">0</attribute>
-                                  </attributes>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="left-attach">1</property>
-                                <property name="top-attach">1</property>
-                                <property name="width">2</property>
-                              </packing>
-                            </child>
-                            <child>
                               <object class="GtkLabel" id="lbl_position">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
@@ -580,6 +433,44 @@
                               <packing>
                                 <property name="left-attach">3</property>
                                 <property name="top-attach">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkComboBoxText" id="cmbt_department">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="active">0</property>
+                                <items>
+                                  <item id="0" translatable="yes">Unknown</item>
+                                  <item id="1" translatable="yes">Administration</item>
+                                  <item id="2" translatable="yes">Research</item>
+                                  <item id="3" translatable="yes">Development</item>
+                                  <item id="4" translatable="yes">Finance</item>
+                                </items>
+                              </object>
+                              <packing>
+                                <property name="left-attach">1</property>
+                                <property name="top-attach">0</property>
+                                <property name="width">2</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkComboBoxText" id="cmbt_position">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="active">0</property>
+                                <items>
+                                  <item id="0" translatable="yes">Unknown</item>
+                                  <item id="1" translatable="yes">Administrator</item>
+                                  <item id="2" translatable="yes">Researcher</item>
+                                  <item id="3" translatable="yes">Developer</item>
+                                  <item id="4" translatable="yes">Finance Controller</item>
+                                </items>
+                              </object>
+                              <packing>
+                                <property name="left-attach">1</property>
+                                <property name="top-attach">1</property>
+                                <property name="width">2</property>
                               </packing>
                             </child>
                             <child>

@@ -9,9 +9,11 @@ public:
                const Glib::RefPtr<Gtk::Builder>& builder);
 private:
     Lib::PersonalCrm m_crm;
+    void update_avatar();
     void display_employee();
 
     // Handlers
+    void on_btn_open_avatar();
     void on_cmbt_country_changed();
     void on_cmbt_region_changed();
     void on_cmbt_city_changed();
@@ -28,6 +30,7 @@ private:
 
     // Personal information
     Gtk::Image* m_img_avatar;
+    Gtk::Button* m_btn_open_avatar;
     Gtk::RadioButton* m_rad_male;
     Gtk::RadioButton* m_rad_female;
     Gtk::Entry* m_entry_name;

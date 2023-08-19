@@ -40,6 +40,7 @@ MainWindow::MainWindow(BaseObjectType* c_object,
                        const Glib::RefPtr<Gtk::Builder>& builder)
     : Gtk::ApplicationWindow(c_object)
 {
+    builder->get_widget<Gtk::Image>("img_avatar", m_img_avatar);
     builder->get_widget<Gtk::Box>("box_information", m_box_information);
     builder->get_widget<Gtk::RadioButton>("rad_male", m_rad_male);
     builder->get_widget<Gtk::RadioButton>("rad_female", m_rad_female);
@@ -56,6 +57,7 @@ MainWindow::MainWindow(BaseObjectType* c_object,
     builder->get_widget<Gtk::ComboBoxText>("cmbt_position", m_cmbt_position);
     builder->get_widget<Gtk::SpinButton>("spin_salary", m_spin_salary);
     builder->get_widget<Gtk::TextView>("tview_notes", m_tview_notes);
+    builder->get_widget<Gtk::Button>("btn_open_avatar", m_btn_open_avatar);
     builder->get_widget<Gtk::Button>("btn_back", m_btn_back);
     builder->get_widget<Gtk::Button>("btn_forward", m_btn_forward);
     builder->get_widget<Gtk::Button>("btn_add", m_btn_add);
@@ -63,6 +65,7 @@ MainWindow::MainWindow(BaseObjectType* c_object,
     builder->get_widget<Gtk::Button>("btn_save", m_btn_save);
     builder->get_widget<Gtk::Button>("btn_quit", m_btn_quit);
 
+    m_btn_open_avatar->signal_clicked().connect(sigc::mem_fun(*this, &MainWindow::on_btn_open_avatar));
     m_rad_male->signal_clicked().connect([this]{ m_crm.employee().gender = m_rad_male->get_label(); });
     m_rad_female->signal_clicked().connect([this]{ m_crm.employee().gender = m_rad_female->get_label(); });
     m_entry_name->signal_changed().connect([this]{ m_crm.employee().name = m_entry_name->get_text(); });
@@ -90,6 +93,19 @@ MainWindow::MainWindow(BaseObjectType* c_object,
 }
 
 void
+MainWindow::update_avatar()
+{
+    Glib::RefPtr<Gdk::Pixbuf> pixbuf;
+    if (m_crm.employee().avatar_location.empty())
+        pixbuf = Gdk::Pixbuf::create_from_resource("/org/seutil/personalcrm/empty_avatar");
+    else
+        pixbuf = Gdk::Pixbuf::create_from_file(m_crm.employee().avatar_location);
+    
+    pixbuf = pixbuf->scale_simple(150, 150, Gdk::INTERP_BILINEAR);
+    m_img_avatar->set(pixbuf);
+}
+
+void
 MainWindow::display_employee()
 {
     if (m_crm.employees().empty())
@@ -102,6 +118,7 @@ MainWindow::display_employee()
     }
 
     Lib::Employee& e = m_crm.employee();
+    update_avatar();
     m_entry_name->set_text(e.name);
     m_entry_surname->set_text(e.surname);
     m_entry_patronomic->set_text(e.patronomic);
@@ -143,6 +160,35 @@ MainWindow::display_employee()
 }
 
 // Handlers
+void
+MainWindow::on_btn_open_avatar()
+{
+    auto dlg = Gtk::FileChooserDialog(*this, "Select avatar", Gtk::FILE_CHOOSER_ACTION_OPEN);
+    dlg.set_transient_for(*this);
+    dlg.set_modal();
+    dlg.add_button("_Cancel", Gtk::RESPONSE_CANCEL);
+    dlg.add_button("_Open", Gtk::RESPONSE_OK);
+
+    // add filters
+    auto filter_png = Gtk::FileFilter::create();
+    auto filter_jpeg = Gtk::FileFilter::create();
+    auto filter_all = Gtk::FileFilter::create();
+    filter_png->set_name("PNG");
+    filter_png->add_mime_type("image/png");
+    filter_jpeg->set_name("JPEG");
+    filter_jpeg->add_mime_type("image/jpg");
+    filter_all->set_name("All");
+    filter_all->add_pattern("*");
+    dlg.add_filter(filter_png);
+    dlg.add_filter(filter_jpeg);
+    dlg.add_filter(filter_all);
+    if (dlg.run() != Gtk::RESPONSE_OK)
+        return;
+    
+    m_crm.employee().avatar_location = dlg.get_filename();
+    update_avatar();
+}
+
 void
 MainWindow::on_cmbt_country_changed()
 {

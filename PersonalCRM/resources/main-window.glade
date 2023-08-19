@@ -279,6 +279,17 @@
                               <object class="GtkComboBoxText" id="cmbt_country">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
+                                <property name="active">0</property>
+                                <property name="active-id">-1</property>
+                                <items>
+                                  <item id="-1" translatable="yes">Unknown</item>
+                                  <item id="0" translatable="yes">Россия</item>
+                                  <item id="1" translatable="yes">Беларусь</item>
+                                  <item id="2" translatable="yes">Україна</item>
+                                  <item id="3" translatable="yes">საქართველო</item>
+                                  <item id="4" translatable="yes">Հայաստան</item>
+                                  <item translatable="yes">Қазақстан</item>
+                                </items>
                               </object>
                               <packing>
                                 <property name="left-attach">1</property>
@@ -288,6 +299,7 @@
                             <child>
                               <object class="GtkComboBoxText" id="cmbt_region">
                                 <property name="visible">True</property>
+                                <property name="sensitive">False</property>
                                 <property name="can-focus">False</property>
                               </object>
                               <packing>
@@ -298,6 +310,7 @@
                             <child>
                               <object class="GtkComboBoxText" id="cmbt_city">
                                 <property name="visible">True</property>
+                                <property name="sensitive">False</property>
                                 <property name="can-focus">False</property>
                               </object>
                               <packing>

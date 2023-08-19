@@ -63,6 +63,8 @@ MainWindow::MainWindow(BaseObjectType* c_object,
     builder->get_widget<Gtk::Button>("btn_save", m_btn_save);
     builder->get_widget<Gtk::Button>("btn_quit", m_btn_quit);
 
+    m_rad_male->signal_clicked().connect([this]{ m_crm.employee().gender = m_rad_male->get_label(); });
+    m_rad_female->signal_clicked().connect([this]{ m_crm.employee().gender = m_rad_female->get_label(); });
     m_entry_name->signal_changed().connect([this]{ m_crm.employee().name = m_entry_name->get_text(); });
     m_entry_surname->signal_changed().connect([this]{ m_crm.employee().surname = m_entry_surname->get_text(); });
     m_entry_patronomic->signal_changed().connect([this]{ m_crm.employee().patronomic = m_entry_patronomic->get_text(); });
@@ -73,6 +75,8 @@ MainWindow::MainWindow(BaseObjectType* c_object,
     m_cmbt_country->signal_changed().connect(sigc::mem_fun(*this, &MainWindow::on_cmbt_country_changed));
     m_con_cmbt_region = m_cmbt_region->signal_changed().connect(sigc::mem_fun(*this, &MainWindow::on_cmbt_region_changed));
     m_cmbt_city->signal_changed().connect(sigc::mem_fun(*this, &MainWindow::on_cmbt_city_changed));
+    m_cmbt_department->signal_changed().connect(sigc::mem_fun(*this, &MainWindow::on_cmbt_department_changed));
+    m_cmbt_position->signal_changed().connect(sigc::mem_fun(*this, &MainWindow::on_cmbt_position_changed));
     m_spin_salary->signal_changed().connect([this]{ m_crm.employee().salary = m_spin_salary->get_value(); });
     m_btn_back->signal_clicked().connect(sigc::mem_fun(*this, &MainWindow::on_btn_back_clicked));
     m_btn_forward->signal_clicked().connect(sigc::mem_fun(*this, &MainWindow::on_btn_forward_clicked));
@@ -205,6 +209,24 @@ MainWindow::on_cmbt_city_changed()
         m_crm.employee().city.clear();
     else
         m_crm.employee().city = m_cmbt_city->get_active_text();
+}
+
+void
+MainWindow::on_cmbt_department_changed()
+{
+    if (m_cmbt_department->get_active_id() == "-1")
+        m_crm.employee().department.clear();
+    else
+        m_crm.employee().department = m_cmbt_department->get_active_text();
+}
+
+void
+MainWindow::on_cmbt_position_changed()
+{
+    if (m_cmbt_position->get_active_id() == "-1")
+        m_crm.employee().position.clear();
+    else
+        m_crm.employee().position = m_cmbt_position->get_active_text();
 }
 
 void

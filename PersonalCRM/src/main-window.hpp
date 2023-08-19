@@ -15,6 +15,8 @@ private:
     void on_cmbt_country_changed();
     void on_cmbt_region_changed();
     void on_cmbt_city_changed();
+    void on_cmbt_department_changed();
+    void on_cmbt_position_changed();
     void on_btn_back_clicked();
     void on_btn_forward_clicked();
     void on_btn_add_clicked();

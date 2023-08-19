@@ -6,6 +6,7 @@ namespace Lib
 
 struct Employee
 {
+    std::string avatar_location;
     std::string gender,
                 name,
                 surname,

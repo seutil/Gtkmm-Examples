@@ -1,6 +1,13 @@
+#include <iostream>
 #include <tinyxml2.h>
 #include "readers.hpp"
 using namespace Lib;
+
+inline std::string
+value_or_empty(const char* str)
+{
+    return str ? str : "";
+}
 
 XmlReader::XmlReader(const std::string& file_location)
     : m_file_location{file_location}
@@ -17,32 +24,32 @@ XmlReader::read(std::vector<Employee>& employees)
         return;
 
     XMLElement* root = xml_doc.FirstChildElement("employees");
-    for (XMLElement* employee_tag = root->FirstChildElement("employee"); employee_tag != nullptr; employee_tag = employee_tag->NextSiblingElement())
+    for (XMLElement* employee_tag = root->FirstChildElement("employee"); employee_tag; employee_tag = employee_tag->NextSiblingElement("employee"))
     {
         Employee employee;
 
         // Personal information block
         XMLElement* pi = employee_tag->FirstChildElement("personal_information");
-        employee.gender = pi->FirstChildElement("gender")->GetText();
-        employee.name = pi->FirstChildElement("name")->GetText();
-        employee.surname = pi->FirstChildElement("surname")->GetText();
-        employee.patronomic = pi->FirstChildElement("patronomic")->GetText();
-        employee.phone = pi->FirstChildElement("phone")->GetText();
-        employee.email = pi->FirstChildElement("email")->GetText();
-        employee.country = pi->FirstChildElement("country")->GetText();
-        employee.region = pi->FirstChildElement("region")->GetText();
-        employee.city = pi->FirstChildElement("city")->GetText();
+        employee.gender = value_or_empty(pi->FirstChildElement("gender")->GetText());
+        employee.name = value_or_empty(pi->FirstChildElement("name")->GetText());
+        employee.surname = value_or_empty(pi->FirstChildElement("surname")->GetText());
+        employee.patronomic = value_or_empty(pi->FirstChildElement("patronomic")->GetText());
+        employee.phone = value_or_empty(pi->FirstChildElement("phone")->GetText());
+        employee.email = value_or_empty(pi->FirstChildElement("email")->GetText());
+        employee.country = value_or_empty(pi->FirstChildElement("country")->GetText());
+        employee.region = value_or_empty(pi->FirstChildElement("region")->GetText());
+        employee.city = value_or_empty(pi->FirstChildElement("city")->GetText());
 
         // Employee information block
         XMLElement* ei = employee_tag->FirstChildElement("employee_information");
-        employee.department = ei->FirstChildElement("department")->GetText();
-        employee.position = ei->FirstChildElement("position")->GetText();
-        employee.supervisor = ei->FirstChildElement("superviser")->GetText();
-        employee.salary = std::stoi(ei->FirstChildElement("salary")->GetText());
+        employee.department = value_or_empty(ei->FirstChildElement("department")->GetText());
+        employee.position = value_or_empty(ei->FirstChildElement("position")->GetText());
+        employee.supervisor = value_or_empty(ei->FirstChildElement("supervisor")->GetText());
+        employee.salary = ei->FirstChildElement("salary")->IntText();
 
         // Additional information block
         XMLElement* ai = employee_tag->FirstChildElement("additional_information");
-        employee.notes = ai->GetText();
+        employee.notes = value_or_empty(ai->FirstChildElement("notes")->GetText());
 
         employees.push_back(employee);
     }

@@ -16,7 +16,7 @@ struct Employee
                 region,
                 city;
     std::string department,
-                superviser,
+                supervisor,
                 position;
     uint salary;
     std::string notes;

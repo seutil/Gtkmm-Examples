@@ -56,7 +56,7 @@ XmlWriter::write(const std::vector<Employee>& employees)
         XMLElement* ei_salary_tag = xml_doc.NewElement("salary");
         ei_depratment_tag->SetText(e.department.c_str());
         ei_position_tag->SetText(e.position.c_str());
-        ei_superviser_tag->SetText(e.superviser.c_str());
+        ei_superviser_tag->SetText(e.supervisor.c_str());
         ei_salary_tag->SetText(e.salary);
         ei_tag->InsertEndChild(ei_depratment_tag);
         ei_tag->InsertEndChild(ei_position_tag);

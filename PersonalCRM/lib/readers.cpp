@@ -37,7 +37,7 @@ XmlReader::read(std::vector<Employee>& employees)
         XMLElement* ei = employee_tag->FirstChildElement("employee_information");
         employee.department = ei->FirstChildElement("department")->GetText();
         employee.position = ei->FirstChildElement("position")->GetText();
-        employee.superviser = ei->FirstChildElement("superviser")->GetText();
+        employee.supervisor = ei->FirstChildElement("superviser")->GetText();
         employee.salary = std::stoi(ei->FirstChildElement("salary")->GetText());
 
         // Additional information block

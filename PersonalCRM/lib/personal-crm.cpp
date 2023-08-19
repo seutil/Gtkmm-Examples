@@ -1,4 +1,3 @@
-#include <istream>
 #include "personal-crm.hpp"
 using namespace Lib;
 
@@ -66,6 +65,6 @@ void
 PersonalCrm::remove_employee()
 {
     m_employees.erase(m_employees.begin() + m_current_employee_id);
-    if (m_current_employee_id == m_employees.size() - 1)
+    if (m_current_employee_id == m_employees.size())
         --m_current_employee_id;
 }

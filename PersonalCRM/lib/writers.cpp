@@ -19,6 +19,7 @@ XmlWriter::write(const std::vector<Employee>& employees)
 
         // Personal information block
         XMLElement* pi_tag = xml_doc.NewElement("personal_information");
+        XMLElement* pi_avatar_location_tag = xml_doc.NewElement("avatar_location");
         XMLElement* pi_gender_tag = xml_doc.NewElement("gender");
         XMLElement* pi_name_tag = xml_doc.NewElement("name");
         XMLElement* pi_surname_tag = xml_doc.NewElement("surname");
@@ -28,6 +29,7 @@ XmlWriter::write(const std::vector<Employee>& employees)
         XMLElement* pi_country_tag = xml_doc.NewElement("country");
         XMLElement* pi_region_tag = xml_doc.NewElement("region");
         XMLElement* pi_city_tag = xml_doc.NewElement("city");
+        pi_avatar_location_tag->SetText(e.avatar_location.c_str());
         pi_gender_tag->SetText(e.gender.c_str());
         pi_name_tag->SetText(e.name.c_str());
         pi_surname_tag->SetText(e.surname.c_str());

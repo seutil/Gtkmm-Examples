@@ -26,9 +26,9 @@ XmlReader::read(std::vector<Employee>& employees)
     for (XMLElement* employee_tag = root->FirstChildElement("employee"); employee_tag; employee_tag = employee_tag->NextSiblingElement("employee"))
     {
         Employee employee;
-
         // Personal information block
         XMLElement* pi = employee_tag->FirstChildElement("personal_information");
+        employee.avatar_location = value_or_empty(pi->FirstChildElement("avatar_location")->GetText());
         employee.gender = value_or_empty(pi->FirstChildElement("gender")->GetText());
         employee.name = value_or_empty(pi->FirstChildElement("name")->GetText());
         employee.surname = value_or_empty(pi->FirstChildElement("surname")->GetText());
